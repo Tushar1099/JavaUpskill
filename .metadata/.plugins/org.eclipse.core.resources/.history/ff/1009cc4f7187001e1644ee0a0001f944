@@ -1,0 +1,15 @@
+package basicDS;
+
+public class ArmStrongNumber {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num = 153;
+		while(num!=0) {
+			int temp = num%10;
+			System.out.print(temp);
+			num = num/10;
+		}
+	}
+
+}

@@ -1,0 +1,33 @@
+package basicDS;
+
+public class ArmStrongNumber {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num = 154;
+		int temp = num;
+		int cube = 0;
+		int armNum = 0;
+		int count = 0;
+		while(num!=0) {
+			int temp1 = num%10;
+			count++;
+			num = num/10;
+		}
+		while(num!=0) {
+			int temp1 = num%10;
+			cube = count;
+			armNum = armNum + cube;
+			num = num/10;
+//			System.out.println(cube);
+		}
+		
+		if(temp == armNum) {
+			System.out.println("ArmStrong Number");
+		}
+		else {
+			System.out.println("Not Arm");
+		}
+	}
+
+}

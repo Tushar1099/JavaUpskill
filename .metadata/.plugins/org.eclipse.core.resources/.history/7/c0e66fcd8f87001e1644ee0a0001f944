@@ -1,0 +1,22 @@
+package basicDS;
+
+import java.util.Scanner;
+
+public class StudentResult {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int[] marks = new int[3];
+		for (int i = 0; i < marks.length; i++) {
+				System.out.println("Enter subject " + (i+1) + " marks");
+				marks[i] = sc.nextInt();
+		}
+		double totalScore = 0;
+		double totalAvg = 0;
+		for (int i = 0; i < marks.length; i++) {
+			totalScore = totalScore + marks[i];
+			totalAvg = totalScore/3;
+		}
+	}
+}

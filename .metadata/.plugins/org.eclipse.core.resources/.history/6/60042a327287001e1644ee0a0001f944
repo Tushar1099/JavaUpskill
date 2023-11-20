@@ -1,0 +1,19 @@
+package basicDS;
+
+public class ArmStrongNumber {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int num = 153;
+		int cube = 0;
+		int armNum = 0;
+		while(num!=0) {
+			int temp = num%10;
+			cube = temp * temp * temp;
+			armNum = armNum + cube;
+			num = num/10;
+		}
+		System.out.println(armNum);
+	}
+
+}

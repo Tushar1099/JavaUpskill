@@ -1,0 +1,26 @@
+package basicDS;
+
+import java.util.Scanner;
+
+public class CUIApplication {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter username: ");
+		String username = sc.next();
+		System.out.println("Enter Password: ");
+		String password = sc.next();
+		int count = 3;
+		
+		if (username.contains("user") && password.contains("user@123")) {
+			System.out.println("Welcome " + username);
+		} else {
+			while(count!=0) {
+				System.out.println("Contact Admin.");
+			}
+		}
+
+	}
+
+}
