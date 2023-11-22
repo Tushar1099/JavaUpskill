@@ -2,25 +2,18 @@ package com.assignment.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.assignment.entity.Student;
-import com.assignment.model.StudentData;
-import com.assignment.repo.StudentRepo;
+import com.assignment.model.StudentPost;
 
-@Service
-public class StudentService {
+public interface StudentService {
 	
-	@Autowired
-	private StudentRepo repo;
+	public Student save(Student student);
 
-	public Student save(Student student) {
-		
-		return repo.save(student);
-	}
+	public Student getStudentById(int id);
+	
+	public Student updateStudent(StudentPost postStudent, int id);
 
-	public Student findById(int id) {
-		return repo.findById(id).orElseThrow(()-> new RuntimeException("user not found"));
-	}
+	public String deleteStudentById(int id);
+
+	public List<Student> getAllStudent();
 }
