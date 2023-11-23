@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.assignment.entity.Student;
-import com.assignment.model.StudentData;
+import com.assignment.model.StudentData; 
 import com.assignment.model.StudentPost;
 import com.assignment.service.StudentService;
 
 @RestController
-@RequestMapping("/web")
+@RequestMapping("/student") 
 public class StudentController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
@@ -28,7 +28,7 @@ public class StudentController {
 	@Autowired
 	private StudentService service;
 	
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<?> postStudent(@RequestBody StudentPost postStudent) {
 		logger.info("postStudent method invoked");
 		Student student = Student.builder()
@@ -41,19 +41,19 @@ public class StudentController {
 		
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
 	public  ResponseEntity<?>  getStudetById(@PathVariable int id) {
 		logger.info("getStudentById method invoked");
 		return new ResponseEntity<>(convertToDto(service.getStudentById(id)),HttpStatus.OK);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/update/{id}")
 	public  ResponseEntity<?>  updateStudent(@RequestBody StudentPost postStudent , @PathVariable int id) {
 		logger.info("updateStudentById method invoked");
 		return new ResponseEntity<>(convertToDto(service.updateStudent(postStudent,id)),HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete//{id}")
 	public  ResponseEntity<?>  deleteStudetById(@PathVariable int id) {
 		logger.info("deleteStudentById method invoked");
 		return new ResponseEntity<>(service.deleteStudentById(id),HttpStatus.OK);

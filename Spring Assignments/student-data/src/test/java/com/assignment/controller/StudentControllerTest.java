@@ -11,85 +11,74 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
- 
-import java.util.Arrays;
-import java.util.List;
- 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
- 
-class StudentControllerTest {
- 
+
+public class StudentControllerTest {
+
     @Mock
-    private StudentService studentServiceMock;
- 
+    private StudentService studentService;
+
     @InjectMocks
     private StudentController studentController;
- 
+
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
     }
- 
+
     @Test
-    void testPostStudent() {
-     
-        StudentPost studentPost = new StudentPost();
-        studentPost.setName("John");
-        studentPost.setAge(25);
-        studentPost.setSalary(50000.0);
- 
-        Student savedStudent = new Student();
-        savedStudent.setId(1);
-        savedStudent.setName("John");
-        savedStudent.setAge(25);
-        savedStudent.setSalary(50000.0);
- 
-        when(studentServiceMock.save(any())).thenReturn(savedStudent);
- 
+    public void testPostStudent() {
         
-        ResponseEntity<?> responseEntity = studentController.postStudent(studentPost);
- 
-        
-        assertNotNull(responseEntity);
+        StudentPost postStudent = new StudentPost();
+        postStudent.setAge(25);
+        postStudent.setSalary(50000.0);
+        postStudent.setName("John Doe");
+
+        Student savedStudent = Student.builder()
+                .id(1)
+                .age(postStudent.getAge())
+                .salary(postStudent.getSalary())
+                .name(postStudent.getName())
+                .build();
+
+        when(studentService.save(any(Student.class))).thenReturn(savedStudent);
+
+        ResponseEntity<?> responseEntity = studentController.postStudent(postStudent);
+
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertNotNull(responseEntity.getBody());
-//        assertTrue(responseEntity.getBody() instanceof StudentData);
- 
-        StudentData studentData = (StudentData) responseEntity.getBody();
-        assertEquals(1L, studentData.getId());
-        assertEquals("John", studentData.getName());
-        assertEquals(25, studentData.getAge());
-        assertEquals(50000.0, studentData.getSalary());
+        assertEquals(StudentData.builder()
+                .id(savedStudent.getId())
+                .age(savedStudent.getAge())
+                .salary(savedStudent.getSalary())
+                .name(savedStudent.getName())
+                .build(), responseEntity.getBody());
     }
- 
+
     @Test
-    void testGetStudentById() {
+    public void testGetStudentById() {
         
         int studentId = 1;
-        Student student = new Student();
-        student.setId(1);
-        student.setName("John");
-        student.setAge(25);
-        student.setSalary(50000.0);
- 
-        when(studentServiceMock.getStudentById(studentId)).thenReturn(student);
- 
-        
+        Student student = Student.builder()
+                .id(studentId)
+                .age(25)
+                .salary(50000.0)
+                .name("John Doe")
+                .build();
+
+        when(studentService.getStudentById(studentId)).thenReturn(student);
+
         ResponseEntity<?> responseEntity = studentController.getStudetById(studentId);
- 
-    
-        assertNotNull(responseEntity);
+
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertNotNull(responseEntity.getBody());
-//        assertTrue(responseEntity.getBody() instanceof StudentData);
- 
-        StudentData studentData = (StudentData) responseEntity.getBody();
-        assertEquals(1L, studentData.getId());
-        assertEquals("John", studentData.getName());
-        assertEquals(25, studentData.getAge());
-        assertEquals(50000.0, studentData.getSalary());
+        assertEquals(StudentData.builder()
+                .id(student.getId())
+                .age(student.getAge())
+                .salary(student.getSalary())
+                .name(student.getName())
+                .build(), responseEntity.getBody());
     }
- 
+
+   
 }

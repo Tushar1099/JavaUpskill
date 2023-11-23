@@ -1,22 +1,28 @@
 package com.assignment.model;
 
-import org.springframework.data.annotation.Id;
-
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-
+ 
 public class StudentData {
 	
 	private int id;
 	private String name;
 	private int age;
 	private double salary;
+	
+	public StudentData() {
+		super();
+	}
+
+	public StudentData(int id, String name, int age, double salary) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+		this.salary = salary;
+	}
+	
 }
