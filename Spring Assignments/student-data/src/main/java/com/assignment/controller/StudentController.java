@@ -59,7 +59,7 @@ public class StudentController {
 		return new ResponseEntity<>(service.deleteStudentById(id),HttpStatus.OK);
 	}
 	
-	@GetMapping("/all")
+	@GetMapping("/getall")
 	public  ResponseEntity<?> getAllStudent() {
 		logger.info("getAllStudents method invoked");
 		return new ResponseEntity<>(service.getAllStudent(),HttpStatus.OK);
